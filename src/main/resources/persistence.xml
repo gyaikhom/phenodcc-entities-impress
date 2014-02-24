@@ -15,5 +15,8 @@
     <class>org.mousephenotype.dcc.entities.impress.ProcedureWeek</class>
     <class>org.mousephenotype.dcc.entities.impress.Units</class>
     <class>org.mousephenotype.dcc.entities.impress.ProcedureHasSuperType</class>
+    <class>org.mousephenotype.dcc.entities.impress.SectionTitle</class>
+    <class>org.mousephenotype.dcc.entities.impress.Section</class>
+    <class>org.mousephenotype.dcc.entities.impress.Sop</class>
   </persistence-unit>
 </persistence>

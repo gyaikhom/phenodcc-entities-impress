@@ -75,7 +75,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Parameter.findByInternal", query = "SELECT p FROM Parameter p WHERE p.internal = :internal"),
     @NamedQuery(name = "Parameter.findByDeleted", query = "SELECT p FROM Parameter p WHERE p.deleted = :deleted"),
     @NamedQuery(name = "Parameter.findByOldParameterKey", query = "SELECT p FROM Parameter p WHERE p.oldParameterKey = :oldParameterKey"),
-    @NamedQuery(name = "Parameter.findByParameterKeys", query = "SELECT p FROM Parameter p WHERE p.parameterKey IN :parameterKeys")
+    @NamedQuery(name = "Parameter.findByParameterKeys", query = "SELECT DISTINCT p FROM Parameter p WHERE p.parameterKey IN :parameterKeys"),
+    @NamedQuery(name = "Parameter.findIMPCParameters", query = "SELECT DISTINCT q FROM Pipeline l, PipelineHasProcedures php, ProcedureHasParameters phq, Parameter q WHERE l.impc = 1 AND l = php.pipelineId AND php.procedureId = phq.procedureId AND phq.parameterId = q AND q.active = 1 AND q.deleted = 0 AND q.deprecated = 0 AND q.isMeta = 0 AND q.graphType IS NOT NULL AND q.graphType != 'NULL' ")
 })
 public class Parameter implements Serializable {
 
