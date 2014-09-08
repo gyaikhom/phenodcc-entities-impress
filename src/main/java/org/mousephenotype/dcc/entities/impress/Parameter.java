@@ -61,8 +61,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Parameter.findByIsDerived", query = "SELECT p FROM Parameter p WHERE p.isDerived = :isDerived"),
     @NamedQuery(name = "Parameter.findByIsImportant", query = "SELECT p FROM Parameter p WHERE p.isImportant = :isImportant"),
     @NamedQuery(name = "Parameter.findByIsIncrement", query = "SELECT p FROM Parameter p WHERE p.isIncrement = :isIncrement"),
-    @NamedQuery(name = "Parameter.findByIsMedia", query = "SELECT p FROM Parameter p WHERE p.isMedia = :isMedia"),
-    @NamedQuery(name = "Parameter.findByIsMeta", query = "SELECT p FROM Parameter p WHERE p.isMeta = :isMeta"),
     @NamedQuery(name = "Parameter.findByIsOption", query = "SELECT p FROM Parameter p WHERE p.isOption = :isOption"),
     @NamedQuery(name = "Parameter.findByIsRequired", query = "SELECT p FROM Parameter p WHERE p.isRequired = :isRequired"),
     @NamedQuery(name = "Parameter.findByQcCheck", query = "SELECT p FROM Parameter p WHERE p.qcCheck = :qcCheck"),
@@ -76,7 +74,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Parameter.findByDeleted", query = "SELECT p FROM Parameter p WHERE p.deleted = :deleted"),
     @NamedQuery(name = "Parameter.findByOldParameterKey", query = "SELECT p FROM Parameter p WHERE p.oldParameterKey = :oldParameterKey"),
     @NamedQuery(name = "Parameter.findByParameterKeys", query = "SELECT DISTINCT p FROM Parameter p WHERE p.parameterKey IN :parameterKeys"),
-    @NamedQuery(name = "Parameter.findIMPCParameters", query = "SELECT DISTINCT q FROM Pipeline l, PipelineHasProcedures php, ProcedureHasParameters phq, Parameter q WHERE l.impc = 1 AND l = php.pipelineId AND php.procedureId = phq.procedureId AND phq.parameterId = q AND q.active = 1 AND q.deleted = 0 AND q.deprecated = 0 AND q.isMeta = 0 AND q.graphType IS NOT NULL AND q.graphType != 'NULL' ")
+    @NamedQuery(name = "Parameter.findIMPCParameters", query = "SELECT DISTINCT q FROM Pipeline l, PipelineHasProcedures php, ProcedureHasParameters phq, Parameter q WHERE l.impc = 1 AND l = php.pipelineId AND php.procedureId = phq.procedureId AND phq.parameterId = q AND q.active = 1 AND q.deleted = 0 AND q.deprecated = 0 AND q.type != 'procedureMetadata' AND q.graphType IS NOT NULL AND q.graphType != 'NULL' ")
 })
 public class Parameter implements Serializable {
 
@@ -124,12 +122,6 @@ public class Parameter implements Serializable {
     @Basic(optional = false)
     @Column(name = "is_increment", nullable = false)
     private boolean isIncrement;
-    @Basic(optional = false)
-    @Column(name = "is_media", nullable = false)
-    private boolean isMedia;
-    @Basic(optional = false)
-    @Column(name = "is_meta", nullable = false)
-    private boolean isMeta;
     @Basic(optional = false)
     @Column(name = "is_option", nullable = false)
     private boolean isOption;
@@ -187,7 +179,12 @@ public class Parameter implements Serializable {
         this.parameterId = parameterId;
     }
 
-    public Parameter(Integer parameterId, boolean visible, boolean active, boolean deprecated, int majorVersion, int minorVersion, boolean isAnnotation, boolean isDerived, boolean isImportant, boolean isIncrement, boolean isMedia, boolean isMeta, boolean isOption, boolean isRequired, boolean qcCheck, String valueType, int userId, boolean internal, boolean deleted) {
+    public Parameter(Integer parameterId, boolean visible, boolean active,
+            boolean deprecated, int majorVersion, int minorVersion,
+            boolean isAnnotation, boolean isDerived, boolean isImportant,
+            boolean isIncrement, boolean isOption, boolean isRequired,
+            boolean qcCheck, String valueType, int userId,
+            boolean internal, boolean deleted) {
         this.parameterId = parameterId;
         this.visible = visible;
         this.active = active;
@@ -198,8 +195,6 @@ public class Parameter implements Serializable {
         this.isDerived = isDerived;
         this.isImportant = isImportant;
         this.isIncrement = isIncrement;
-        this.isMedia = isMedia;
-        this.isMeta = isMeta;
         this.isOption = isOption;
         this.isRequired = isRequired;
         this.qcCheck = qcCheck;
@@ -329,23 +324,7 @@ public class Parameter implements Serializable {
         this.isIncrement = isIncrement;
     }
 
-    public boolean getIsMedia() {
-        return isMedia;
-    }
-
-    public void setIsMedia(boolean isMedia) {
-        this.isMedia = isMedia;
-    }
-
-    public boolean getIsMeta() {
-        return isMeta;
-    }
-
-    public void setIsMeta(boolean isMeta) {
-        this.isMeta = isMeta;
-    }
-
-    public boolean getIsOption() {
+   public boolean getIsOption() {
         return isOption;
     }
 

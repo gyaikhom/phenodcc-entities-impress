@@ -43,6 +43,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PipelineHasProcedures.findAll", query = "SELECT p FROM PipelineHasProcedures p"),
     @NamedQuery(name = "PipelineHasProcedures.findById", query = "SELECT p FROM PipelineHasProcedures p WHERE p.id = :id"),
     @NamedQuery(name = "PipelineHasProcedures.findByWeight", query = "SELECT p FROM PipelineHasProcedures p WHERE p.weight = :weight"),
+    @NamedQuery(name = "PipelineHasProcedures.findByMinFemales", query = "SELECT p FROM PipelineHasProcedures p WHERE p.minFemales = :minFemales"),
+    @NamedQuery(name = "PipelineHasProcedures.findByMinMales", query = "SELECT p FROM PipelineHasProcedures p WHERE p.minMales = :minMales"),
+    @NamedQuery(name = "PipelineHasProcedures.findByMinAnimals", query = "SELECT p FROM PipelineHasProcedures p WHERE p.minAnimals = :minAnimals"),
     @NamedQuery(name = "PipelineHasProcedures.findByIsVisible", query = "SELECT p FROM PipelineHasProcedures p WHERE p.isVisible = :isVisible"),
     @NamedQuery(name = "PipelineHasProcedures.findByIsActive", query = "SELECT p FROM PipelineHasProcedures p WHERE p.isActive = :isActive"),
     @NamedQuery(name = "PipelineHasProcedures.findByIsMandatory", query = "SELECT p FROM PipelineHasProcedures p WHERE p.isMandatory = :isMandatory"),
@@ -75,6 +78,15 @@ public class PipelineHasProcedures implements Serializable {
     @Basic(optional = false)
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
+    @Basic(optional = true)
+    @Column(name = "min_females", nullable = true)
+    private Integer minFemales;
+    @Basic(optional = true)
+    @Column(name = "min_males", nullable = true)
+    private Integer minMales;
+    @Basic(optional = true)
+    @Column(name = "min_animals", nullable = true)
+    private Integer minAnimals;
     @JoinColumn(name = "week", referencedColumnName = "id")
     @ManyToOne
     private ProcedureWeek week;
@@ -172,6 +184,30 @@ public class PipelineHasProcedures implements Serializable {
 
     public void setWeek(ProcedureWeek week) {
         this.week = week;
+    }
+
+    public Integer getMinFemales() {
+        return minFemales;
+    }
+
+    public void setMinFemales(Integer minFemales) {
+        this.minFemales = minFemales;
+    }
+
+    public Integer getMinMales() {
+        return minMales;
+    }
+
+    public void setMinMales(Integer minMales) {
+        this.minMales = minMales;
+    }
+
+    public Integer getMinAnimals() {
+        return minAnimals;
+    }
+
+    public void setMinAnimals(Integer minAnimals) {
+        this.minAnimals = minAnimals;
     }
 
     public Procedure getProcedureId() {
