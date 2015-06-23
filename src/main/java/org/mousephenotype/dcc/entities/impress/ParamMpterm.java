@@ -96,7 +96,12 @@ public class ParamMpterm implements Serializable {
         this.paramMptermId = paramMptermId;
     }
 
-    public ParamMpterm(Integer paramMptermId, String mpTerm, String mpId, int weight, boolean deleted) {
+    public ParamMpterm(
+            Integer paramMptermId,
+            String mpTerm,
+            String mpId,
+            int weight,
+            boolean deleted) {
         this.paramMptermId = paramMptermId;
         this.mpTerm = mpTerm;
         this.mpId = mpId;

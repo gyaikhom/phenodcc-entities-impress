@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.XmlType;
     @NamedQuery(name = "Procedure.findByProcedureId", query = "SELECT p FROM Procedure p WHERE p.procedureId = :procedureId"),
     @NamedQuery(name = "Procedure.findByProcedureKey", query = "SELECT p FROM Procedure p WHERE p.procedureKey = :procedureKey"),
     @NamedQuery(name = "Procedure.findByProcedureKeyLike", query = "SELECT p FROM Procedure p WHERE (p.procedureKey LIKE :pattern1 OR p.procedureKey LIKE :pattern2) order by p.name, p.procedureKey"),
-    @NamedQuery(name = "Procedure.findByPipelineId", query = "SELECT p FROM Procedure p, PipelineHasProcedures php WHERE (p = php.procedureId AND php.pipelineId = :pipelineId) order by p.name, p.procedureKey"),
+    @NamedQuery(name = "Procedure.findByPipelineId", query = "SELECT p FROM Procedure p join PipelineHasProcedures php on (p = php.procedureId) WHERE (php.pipelineId = :pipelineId AND (php.procedureId.procedureId NOT IN (select DISTINCT ip.procedureId FROM IgnoreProcedures ip))) order by p.name, p.procedureKey"),
     @NamedQuery(name = "Procedure.findByName", query = "SELECT p FROM Procedure p WHERE p.name = :name"),
     @NamedQuery(name = "Procedure.findByType", query = "SELECT p FROM Procedure p WHERE p.type = :type"),
     @NamedQuery(name = "Procedure.findByMajorVersion", query = "SELECT p FROM Procedure p WHERE p.majorVersion = :majorVersion"),

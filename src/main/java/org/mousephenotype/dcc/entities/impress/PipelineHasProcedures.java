@@ -104,7 +104,14 @@ public class PipelineHasProcedures implements Serializable {
         this.id = id;
     }
 
-    public PipelineHasProcedures(Integer id, boolean isVisible, boolean isActive, boolean isMandatory, boolean isInternal, boolean isDeprecated, boolean isDeleted) {
+    public PipelineHasProcedures(
+            Integer id,
+            boolean isVisible,
+            boolean isActive,
+            boolean isMandatory,
+            boolean isInternal,
+            boolean isDeprecated,
+            boolean isDeleted) {
         this.id = id;
         this.isVisible = isVisible;
         this.isActive = isActive;

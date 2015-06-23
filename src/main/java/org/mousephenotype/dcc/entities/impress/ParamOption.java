@@ -94,7 +94,12 @@ public class ParamOption implements Serializable {
         this.paramOptionId = paramOptionId;
     }
 
-    public ParamOption(Integer paramOptionId, boolean isDefault, boolean isActive, int weight, boolean deleted) {
+    public ParamOption(
+            Integer paramOptionId,
+            boolean isDefault,
+            boolean isActive,
+            int weight,
+            boolean deleted) {
         this.paramOptionId = paramOptionId;
         this.isDefault = isDefault;
         this.isActive = isActive;

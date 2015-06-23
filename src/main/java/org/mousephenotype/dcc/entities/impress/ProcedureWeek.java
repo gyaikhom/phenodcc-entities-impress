@@ -73,7 +73,11 @@ public class ProcedureWeek implements Serializable {
         this.id = id;
     }
 
-    public ProcedureWeek(Integer id, String label, String stage, short weight) {
+    public ProcedureWeek(
+            Integer id,
+            String label,
+            String stage,
+            short weight) {
         this.id = id;
         this.label = label;
         this.stage = stage;

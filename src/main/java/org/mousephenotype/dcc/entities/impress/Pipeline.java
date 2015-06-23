@@ -120,9 +120,17 @@ public class Pipeline implements Serializable {
         this.pipelineId = pipelineId;
     }
 
-    public Pipeline(Integer pipelineId, String pipelineKey, boolean visible,
-            boolean active, boolean deprecated, int majorVersion,
-            int minorVersion, int userId, boolean internal, boolean deleted) {
+    public Pipeline(
+            Integer pipelineId,
+            String pipelineKey,
+            boolean visible,
+            boolean active,
+            boolean deprecated,
+            int majorVersion,
+            int minorVersion,
+            int userId,
+            boolean internal,
+            boolean deleted) {
         this.pipelineId = pipelineId;
         this.pipelineKey = pipelineKey;
         this.visible = visible;

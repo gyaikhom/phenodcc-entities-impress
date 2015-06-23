@@ -95,7 +95,11 @@ public class Sop implements Serializable {
         this.sopId = sopId;
     }
 
-    public Sop(Integer sopId, int majorVersion, int minorVersion, boolean deleted) {
+    public Sop(
+            Integer sopId,
+            int majorVersion,
+            int minorVersion,
+            boolean deleted) {
         this.sopId = sopId;
         this.majorVersion = majorVersion;
         this.minorVersion = minorVersion;

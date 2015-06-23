@@ -97,7 +97,11 @@ public class Section implements Serializable {
         this.sectionId = sectionId;
     }
 
-    public Section(Integer sectionId, int majorVersion, int minorVersion, boolean deleted) {
+    public Section(
+            Integer sectionId,
+            int majorVersion,
+            int minorVersion,
+            boolean deleted) {
         this.sectionId = sectionId;
         this.majorVersion = majorVersion;
         this.minorVersion = minorVersion;

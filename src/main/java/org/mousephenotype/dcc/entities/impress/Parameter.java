@@ -73,8 +73,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Parameter.findByInternal", query = "SELECT p FROM Parameter p WHERE p.internal = :internal"),
     @NamedQuery(name = "Parameter.findByDeleted", query = "SELECT p FROM Parameter p WHERE p.deleted = :deleted"),
     @NamedQuery(name = "Parameter.findByOldParameterKey", query = "SELECT p FROM Parameter p WHERE p.oldParameterKey = :oldParameterKey"),
-    @NamedQuery(name = "Parameter.findByParameterKeys", query = "SELECT DISTINCT p FROM Parameter p WHERE p.parameterKey IN :parameterKeys"),
-    @NamedQuery(name = "Parameter.findIMPCParameters", query = "SELECT DISTINCT q FROM Pipeline l, PipelineHasProcedures php, ProcedureHasParameters phq, Parameter q WHERE l.impc = 1 AND l = php.pipelineId AND php.procedureId = phq.procedureId AND phq.parameterId = q AND q.active = 1 AND q.deleted = 0 AND q.deprecated = 0 AND q.type != 'procedureMetadata' AND q.graphType IS NOT NULL AND q.graphType != 'NULL' ")
+    @NamedQuery(name = "Parameter.findByParameterKeys", query = "SELECT p FROM Parameter p WHERE p.parameterKey IN :parameterKeys"),
+    @NamedQuery(name = "Parameter.findIMPCParameters", query = "SELECT q FROM Pipeline l join PipelineHasProcedures php on (l = php.pipelineId) join ProcedureHasParameters phq on (php.procedureId = phq.procedureId) join Parameter q on (phq.parameterId = q) WHERE l.impc = 1 AND q.active = 1 AND q.deleted = 0 AND q.deprecated = 0 AND q.graphType IS NOT NULL AND q.graphType != 'NULL' AND q.type != 'procedureMetadata' AND (php.procedureId.procedureId NOT IN (select DISTINCT ip.procedureId FROM IgnoreProcedures ip))")
 })
 public class Parameter implements Serializable {
 
@@ -179,12 +179,24 @@ public class Parameter implements Serializable {
         this.parameterId = parameterId;
     }
 
-    public Parameter(Integer parameterId, boolean visible, boolean active,
-            boolean deprecated, int majorVersion, int minorVersion,
-            boolean isAnnotation, boolean isDerived, boolean isImportant,
-            boolean isIncrement, boolean isOption, boolean isRequired,
-            boolean qcCheck, String valueType, int userId,
-            boolean internal, boolean deleted) {
+    public Parameter(
+            Integer parameterId,
+            boolean visible,
+            boolean active,
+            boolean deprecated,
+            int majorVersion,
+            int minorVersion,
+            boolean isAnnotation,
+            boolean isDerived,
+            boolean isImportant,
+            boolean isIncrement,
+            boolean isOption,
+            boolean isRequired,
+            boolean qcCheck,
+            String valueType,
+            int userId,
+            boolean internal,
+            boolean deleted) {
         this.parameterId = parameterId;
         this.visible = visible;
         this.active = active;

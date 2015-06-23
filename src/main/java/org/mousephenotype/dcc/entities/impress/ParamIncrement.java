@@ -92,7 +92,11 @@ public class ParamIncrement implements Serializable {
         this.paramIncrementId = paramIncrementId;
     }
 
-    public ParamIncrement(Integer paramIncrementId, int weight, boolean isActive, boolean deleted) {
+    public ParamIncrement(
+            Integer paramIncrementId,
+            int weight,
+            boolean isActive,
+            boolean deleted) {
         this.paramIncrementId = paramIncrementId;
         this.weight = weight;
         this.isActive = isActive;
